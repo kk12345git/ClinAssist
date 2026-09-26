@@ -18,61 +18,90 @@ import {
   Activity,
   AlertTriangle,
   Award,
+  HeartPulse,
+  Building2,
+  TrendingDown,
+  CheckCircle2,
+  Hospital,
+  Zap,
 } from 'lucide-react';
 
 export const LandingPage: React.FC = () => {
   const { t, language, setLanguage } = useLanguage();
-  const { setActiveStep } = usePatient();
+  const { setActiveStep, dashboardStats, vitals } = usePatient();
 
   return (
-    <div className="relative overflow-hidden bg-slate-950 text-white min-h-[calc(100vh-4rem)]">
-      {/* Background Ambient Glows */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-teal-500/10 rounded-full filter blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full filter blur-3xl pointer-events-none" />
+    <div className="relative overflow-hidden bg-hospital-canvas text-slate-900 min-h-[calc(100vh-4rem)]">
+      {/* Background Soft Pink Ambient Glows */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-rose-200/20 rounded-full filter blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 right-1/4 w-[500px] h-[500px] bg-pink-200/20 rounded-full filter blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Step 1 Hero Header */}
-        <div className="text-center max-w-3xl mx-auto">
-          {/* Logo & Badge */}
-          <div className="inline-flex items-center space-x-3 px-4 py-2 rounded-full bg-slate-900/90 border border-teal-500/30 shadow-xl mb-6">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-teal-400 to-cyan-400 flex items-center justify-center shadow-md">
-              <Stethoscope className="w-4 h-4 text-slate-950" />
+        <div className="text-center max-w-4xl mx-auto">
+          {/* Hospital Certification Badge */}
+          <div className="inline-flex items-center space-x-2.5 px-4 py-2 rounded-full bg-white border border-rose-200 shadow-sm shadow-rose-100 mb-6">
+            <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-rose-500 to-pink-500 flex items-center justify-center text-white shadow-xs">
+              <Hospital className="w-4 h-4" />
             </div>
-            <span className="text-xs font-semibold text-teal-300 tracking-wide uppercase">
-              ClinAssist Clinical Decision Support System
+            <span className="text-xs font-bold text-rose-700 tracking-wide uppercase">
+              Hospital Enterprise Clinical AI Decision Platform
+            </span>
+            <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-rose-500 text-white">
+              v2.0
             </span>
           </div>
 
           {/* Main Title & Tagline */}
-          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
-            Next-Gen AI Clinical Intake & <br />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 via-cyan-300 to-emerald-300">
-              Case-Taking Platform
+          <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 leading-tight">
+            Next-Gen Hospital Intake & <br />
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-rose-600 via-pink-600 to-rose-700">
+              AI Clinical Decision Support
             </span>
           </h1>
 
-          <p className="mt-4 text-base sm:text-lg text-slate-300 font-light max-w-2xl mx-auto leading-relaxed">
-            {t('tagline')}
+          <p className="mt-5 text-base sm:text-xl text-slate-600 font-normal max-w-3xl mx-auto leading-relaxed">
+            Automating patient triage, ambient voice case-taking, diagnostic OCR, and physician SOAP notes. Designed for immediate deployment in hospital OPDs, emergency triage bays, and multi-specialty clinics.
           </p>
 
+          {/* Hospital ROI & Trust Metric Pills */}
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3 text-xs">
+            <span className="px-3.5 py-1.5 rounded-full bg-white border border-rose-100 text-slate-700 font-semibold shadow-xs flex items-center space-x-1.5">
+              <TrendingDown className="w-3.5 h-3.5 text-rose-500" />
+              <span><strong>72% Faster</strong> Patient Charting</span>
+            </span>
+            <span className="px-3.5 py-1.5 rounded-full bg-white border border-rose-100 text-slate-700 font-semibold shadow-xs flex items-center space-x-1.5">
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+              <span><strong>100%</strong> Red-Flag Clinical Screening</span>
+            </span>
+            <span className="px-3.5 py-1.5 rounded-full bg-white border border-rose-100 text-slate-700 font-semibold shadow-xs flex items-center space-x-1.5">
+              <Globe className="w-3.5 h-3.5 text-blue-600" />
+              <span><strong>Tamil + Thanglish + English</strong> Real-Time Voice</span>
+            </span>
+            <span className="px-3.5 py-1.5 rounded-full bg-white border border-rose-100 text-slate-700 font-semibold shadow-xs flex items-center space-x-1.5">
+              <Zap className="w-3.5 h-3.5 text-amber-500" />
+              <span><strong>Live Telemetry</strong> Tele-ICU & OPD Ready</span>
+            </span>
+          </div>
+
           {/* Action Card Grid */}
-          <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
+          <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-4xl mx-auto">
             {/* Start New Case Card */}
             <button
               onClick={() => setActiveStep(3)} // Jump to Patient Registration
-              className="group p-6 rounded-2xl bg-gradient-to-b from-teal-900/40 to-slate-900 border border-teal-500/40 hover:border-teal-400/80 shadow-xl hover:shadow-teal-500/20 text-left transition transform hover:-translate-y-1 relative overflow-hidden"
+              className="group p-6 rounded-3xl bg-white border border-rose-200/80 hover:border-rose-400 shadow-sm hover:shadow-xl hover:shadow-rose-100/60 text-left transition transform hover:-translate-y-1 relative overflow-hidden"
             >
-              <div className="w-12 h-12 rounded-xl bg-teal-500/20 flex items-center justify-center text-teal-400 group-hover:bg-teal-500 group-hover:text-slate-950 transition">
+              <div className="w-12 h-12 rounded-2xl bg-rose-50 border border-rose-200 flex items-center justify-center text-rose-500 group-hover:bg-rose-500 group-hover:text-white transition">
                 <UserPlus className="w-6 h-6" />
               </div>
-              <h3 className="mt-4 font-bold text-lg text-white group-hover:text-teal-300 transition">
+              <h3 className="mt-4 font-bold text-lg text-slate-900 group-hover:text-rose-600 transition">
                 {t('startNewCase')}
               </h3>
-              <p className="text-xs text-slate-400 mt-1">
-                Register new patient & initiate AI voice/text clinical intake.
+              <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">
+                Register OPD/Emergency patient with live vitals telemetry & AI speech intake.
               </p>
-              <div className="mt-4 inline-flex items-center text-xs font-semibold text-teal-400 group-hover:translate-x-1 transition">
-                <span>Begin Intake</span>
+              <div className="mt-4 inline-flex items-center text-xs font-bold text-rose-600 group-hover:translate-x-1 transition">
+                <span>Initiate Hospital Intake</span>
                 <ArrowRight className="w-3.5 h-3.5 ml-1" />
               </div>
             </button>
@@ -80,19 +109,19 @@ export const LandingPage: React.FC = () => {
             {/* Existing Patient Card */}
             <button
               onClick={() => setActiveStep(11)} // Jump to Practitioner Dashboard
-              className="group p-6 rounded-2xl bg-gradient-to-b from-cyan-900/40 to-slate-900 border border-cyan-500/40 hover:border-cyan-400/80 shadow-xl hover:shadow-cyan-500/20 text-left transition transform hover:-translate-y-1"
+              className="group p-6 rounded-3xl bg-white border border-rose-200/80 hover:border-rose-400 shadow-sm hover:shadow-xl hover:shadow-rose-100/60 text-left transition transform hover:-translate-y-1"
             >
-              <div className="w-12 h-12 rounded-xl bg-cyan-500/20 flex items-center justify-center text-cyan-400 group-hover:bg-cyan-500 group-hover:text-slate-950 transition">
+              <div className="w-12 h-12 rounded-2xl bg-pink-50 border border-pink-200 flex items-center justify-center text-pink-500 group-hover:bg-pink-500 group-hover:text-white transition">
                 <Search className="w-6 h-6" />
               </div>
-              <h3 className="mt-4 font-bold text-lg text-white group-hover:text-cyan-300 transition">
+              <h3 className="mt-4 font-bold text-lg text-slate-900 group-hover:text-pink-600 transition">
                 {t('existingPatient')}
               </h3>
-              <p className="text-xs text-slate-400 mt-1">
-                Search medical records, past visits, and case history.
+              <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">
+                Search hospital EMR records, historical labs, token queues, and past visits.
               </p>
-              <div className="mt-4 inline-flex items-center text-xs font-semibold text-cyan-400 group-hover:translate-x-1 transition">
-                <span>Search Patient</span>
+              <div className="mt-4 inline-flex items-center text-xs font-bold text-pink-600 group-hover:translate-x-1 transition">
+                <span>Search Hospital Records</span>
                 <ArrowRight className="w-3.5 h-3.5 ml-1" />
               </div>
             </button>
@@ -100,41 +129,41 @@ export const LandingPage: React.FC = () => {
             {/* Practitioner Portal Card */}
             <button
               onClick={() => setActiveStep(11)} // Jump to Practitioner Dashboard
-              className="group p-6 rounded-2xl bg-gradient-to-b from-purple-900/40 to-slate-900 border border-purple-500/40 hover:border-purple-400/80 shadow-xl hover:shadow-purple-500/20 text-left transition transform hover:-translate-y-1"
+              className="group p-6 rounded-3xl bg-white border border-rose-200/80 hover:border-rose-400 shadow-sm hover:shadow-xl hover:shadow-rose-100/60 text-left transition transform hover:-translate-y-1"
             >
-              <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center text-purple-400 group-hover:bg-purple-500 group-hover:text-slate-950 transition">
+              <div className="w-12 h-12 rounded-2xl bg-purple-50 border border-purple-200 flex items-center justify-center text-purple-600 group-hover:bg-purple-600 group-hover:text-white transition">
                 <Stethoscope className="w-6 h-6" />
               </div>
-              <h3 className="mt-4 font-bold text-lg text-white group-hover:text-purple-300 transition">
-                {t('practitionerLogin')}
+              <h3 className="mt-4 font-bold text-lg text-slate-900 group-hover:text-purple-600 transition">
+                Doctor Triage Console
               </h3>
-              <p className="text-xs text-slate-400 mt-1">
-                Doctor dashboard, review pending cases & sign case sheets.
+              <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">
+                Physician dashboard, review triage alerts, sign digital SOAP sheets, and export Rx.
               </p>
-              <div className="mt-4 inline-flex items-center text-xs font-semibold text-purple-400 group-hover:translate-x-1 transition">
-                <span>Open Dashboard</span>
+              <div className="mt-4 inline-flex items-center text-xs font-bold text-purple-600 group-hover:translate-x-1 transition">
+                <span>Open Doctor Console</span>
                 <ArrowRight className="w-3.5 h-3.5 ml-1" />
               </div>
             </button>
           </div>
         </div>
 
-        {/* Step 2 Language Quick Bar Highlight */}
-        <div className="mt-14 max-w-4xl mx-auto rounded-2xl bg-slate-900/80 border border-slate-800 p-6 shadow-2xl">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-full bg-teal-500/20 border border-teal-500/40 flex items-center justify-center text-teal-300">
-                <Globe className="w-5 h-5" />
+        {/* Live Hospital Telemetry & Language Bar */}
+        <div className="mt-12 max-w-5xl mx-auto rounded-3xl bg-white border border-rose-100 p-6 shadow-sm shadow-rose-100/50">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 rounded-2xl bg-rose-50 border border-rose-200 flex items-center justify-center text-rose-600 shrink-0">
+                <Globe className="w-6 h-6" />
               </div>
               <div>
-                <h4 className="font-bold text-sm text-white flex items-center space-x-2">
-                  <span>Multilingual Support Engine</span>
-                  <span className="px-2 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                    Tamil + English + Thanglish Fully Functional
+                <h4 className="font-bold text-sm text-slate-900 flex items-center space-x-2">
+                  <span>Indic Multilingual Voice AI Engine</span>
+                  <span className="px-2.5 py-0.5 rounded-full text-[10px] bg-rose-50 text-rose-700 border border-rose-200 font-bold">
+                    Tamil • Thanglish • English Active
                   </span>
                 </h4>
-                <p className="text-xs text-slate-400">
-                  Select your preferred language for instant patient case taking and AI prompts.
+                <p className="text-xs text-slate-500 mt-0.5">
+                  Allows rural and regional patients to speak naturally in native dialects; ClinAssist parses symptoms into formal medical English.
                 </p>
               </div>
             </div>
@@ -144,10 +173,10 @@ export const LandingPage: React.FC = () => {
                 <button
                   key={lang.code}
                   onClick={() => setLanguage(lang.code)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition flex items-center space-x-1 ${
+                  className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition flex items-center space-x-1.5 ${
                     language === lang.code
-                      ? 'bg-teal-500 text-slate-950 font-bold shadow-md shadow-teal-500/30'
-                      : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                      ? 'bg-gradient-to-r from-rose-500 to-pink-500 text-white shadow-md shadow-rose-200'
+                      : 'bg-slate-50 text-slate-700 hover:bg-rose-50 border border-slate-200'
                   }`}
                 >
                   <span>{lang.flag}</span>
@@ -158,34 +187,42 @@ export const LandingPage: React.FC = () => {
           </div>
         </div>
 
-        {/* 12-Step Workflow Preview Bar */}
-        <div className="mt-12 max-w-6xl mx-auto">
-          <h3 className="text-center font-bold text-sm text-slate-400 uppercase tracking-widest mb-6">
-            Complete 12-Step Healthcare Intake Architecture
-          </h3>
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3">
+        {/* 12-Step Hospital Clinical Workflow Bar */}
+        <div className="mt-14 max-w-6xl mx-auto">
+          <div className="text-center mb-6">
+            <span className="text-[11px] font-bold text-rose-600 uppercase tracking-widest block">
+              Enterprise Hospital EMR Architecture
+            </span>
+            <h3 className="font-extrabold text-xl text-slate-900 mt-1">
+              End-to-End 12-Step Patient Intake to Certified Discharge Workflow
+            </h3>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3.5">
             {[
-              { num: 1, name: 'Welcome Page', icon: Sparkles, color: 'text-teal-400' },
-              { num: 2, name: 'Language Select', icon: Globe, color: 'text-cyan-400' },
-              { num: 3, name: 'Patient Reg', icon: UserPlus, color: 'text-emerald-400' },
-              { num: 4, name: 'Case Taking', icon: Mic, color: 'text-purple-400' },
-              { num: 5, name: 'AI Questions', icon: Activity, color: 'text-pink-400' },
-              { num: 6, name: 'Structured Symptoms', icon: FileText, color: 'text-amber-400' },
-              { num: 7, name: 'Document OCR', icon: FileText, color: 'text-teal-400' },
-              { num: 8, name: 'Medical Timeline', icon: Clock, color: 'text-blue-400' },
-              { num: 9, name: 'Red Flags Review', icon: AlertTriangle, color: 'text-red-400' },
-              { num: 10, name: 'AI Summary', icon: Sparkles, color: 'text-indigo-400' },
-              { num: 11, name: 'Dashboard', icon: ShieldCheck, color: 'text-emerald-400' },
-              { num: 12, name: 'Final Case PDF', icon: Award, color: 'text-yellow-400' },
+              { num: 1, name: 'Hospital Welcome', icon: Sparkles, color: 'text-rose-500', bg: 'bg-rose-50' },
+              { num: 2, name: 'Language Engine', icon: Globe, color: 'text-pink-500', bg: 'bg-pink-50' },
+              { num: 3, name: 'Patient Triage Reg', icon: UserPlus, color: 'text-rose-600', bg: 'bg-rose-50' },
+              { num: 4, name: 'Ambient Voice Intake', icon: Mic, color: 'text-purple-500', bg: 'bg-purple-50' },
+              { num: 5, name: 'Adaptive CDS Qs', icon: Activity, color: 'text-pink-600', bg: 'bg-pink-50' },
+              { num: 6, name: 'Structured Symptoms', icon: FileText, color: 'text-amber-500', bg: 'bg-amber-50' },
+              { num: 7, name: 'Prescription OCR', icon: FileText, color: 'text-blue-500', bg: 'bg-blue-50' },
+              { num: 8, name: 'Patient Timeline', icon: Clock, color: 'text-indigo-500', bg: 'bg-indigo-50' },
+              { num: 9, name: 'Red-Flag Safety CDS', icon: AlertTriangle, color: 'text-red-500', bg: 'bg-red-50' },
+              { num: 10, name: 'SOAP Notes & ICD-10', icon: Sparkles, color: 'text-rose-600', bg: 'bg-rose-50' },
+              { num: 11, name: 'Doctor Dashboard', icon: ShieldCheck, color: 'text-emerald-500', bg: 'bg-emerald-50' },
+              { num: 12, name: 'Certified Hospital PDF', icon: Award, color: 'text-amber-600', bg: 'bg-amber-50' },
             ].map(s => (
               <div
                 key={s.num}
                 onClick={() => setActiveStep(s.num)}
-                className="p-3 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-teal-500/40 transition cursor-pointer text-center group"
+                className="p-3.5 rounded-2xl bg-white border border-rose-100 hover:border-rose-300 transition cursor-pointer text-center group shadow-xs hover:shadow-md hover:shadow-rose-100"
               >
-                <s.icon className={`w-5 h-5 mx-auto ${s.color} group-hover:scale-110 transition`} />
-                <p className="text-[11px] font-bold text-slate-200 mt-2">Step {s.num}</p>
-                <p className="text-[10px] text-slate-400 line-clamp-1">{s.name}</p>
+                <div className={`w-8 h-8 mx-auto rounded-xl ${s.bg} flex items-center justify-center ${s.color} group-hover:scale-110 transition`}>
+                  <s.icon className="w-4 h-4" />
+                </div>
+                <p className="text-[11px] font-bold text-slate-800 mt-2">Step {s.num}</p>
+                <p className="text-[10px] text-slate-500 font-medium line-clamp-1">{s.name}</p>
               </div>
             ))}
           </div>

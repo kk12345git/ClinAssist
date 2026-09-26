@@ -2,26 +2,92 @@
 
 @layer base {
   body {
-    background-color: #020617;
-    color: #f8fafc;
+    background-color: #FAFAFD;
+    color: #0F172A;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
   }
 }
 
-/* Custom Scrollbars for Medical Panels */
+/* Premium White with Pink Accents Utility Classes */
+.bg-hospital-canvas {
+  background-color: #FAFAFD;
+  background-image: 
+    radial-gradient(at 10% 10%, rgba(244, 63, 94, 0.03) 0px, transparent 50%),
+    radial-gradient(at 90% 90%, rgba(236, 72, 153, 0.03) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(255, 241, 242, 0.4) 0px, transparent 70%);
+}
+
+.card-premium-white {
+  background: #FFFFFF;
+  border: 1px solid #FFE4E6; /* rose-100 */
+  box-shadow: 0 4px 20px -2px rgba(244, 63, 94, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
+}
+
+.card-premium-hover {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-premium-hover:hover {
+  border-color: #FDA4AF; /* rose-300 */
+  box-shadow: 0 10px 25px -3px rgba(244, 63, 94, 0.1), 0 4px 10px -2px rgba(0, 0, 0, 0.03);
+  transform: translateY(-2px);
+}
+
+.pink-glow {
+  box-shadow: 0 0 25px rgba(244, 63, 94, 0.15);
+}
+
+.pink-glow-sm {
+  box-shadow: 0 0 12px rgba(244, 63, 94, 0.1);
+}
+
+/* Custom Scrollbars for Medical Panels (Blush/Rose Theme) */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #090d16;
+  background: #FFF1F2; /* rose-50 */
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #FDA4AF; /* rose-300 */
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #14b8a6;
+  background: #F43F5E; /* rose-500 */
+}
+
+/* Live Heartbeat / ECG Wave Animation */
+@keyframes ecgPulse {
+  0% { transform: scale(1); opacity: 0.9; }
+  15% { transform: scale(1.15); opacity: 1; }
+  30% { transform: scale(1); opacity: 0.9; }
+  45% { transform: scale(1.22); opacity: 1; }
+  60% { transform: scale(1); opacity: 0.9; }
+  100% { transform: scale(1); opacity: 0.9; }
+}
+
+.animate-ecg-heart {
+  animation: ecgPulse 1.8s infinite ease-in-out;
+}
+
+/* Print Stylesheet for Hospital EMR Sheets */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  header, footer, nav, button, .no-print {
+    display: none !important;
+  }
+  #printable-case-sheet {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
 }

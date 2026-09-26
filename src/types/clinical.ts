@@ -8,6 +8,46 @@ export interface LanguageOption {
   isMvpFull?: boolean;
 }
 
+export interface PatientVitals {
+  heartRate: number; // BPM
+  bloodPressureSys: number; // mmHg
+  bloodPressureDia: number; // mmHg
+  spO2: number; // %
+  temperature: number; // °F
+  respiratoryRate: number; // /min
+  bloodGlucose: number; // mg/dL
+  lastUpdated: string;
+  triageLevel: 'P1 - Resuscitation' | 'P2 - Emergent' | 'P3 - Urgent' | 'P4 - Routine';
+  isAbnormal?: boolean;
+}
+
+export interface HospitalAssignment {
+  tokenNumber: string; // e.g. #OPD-108
+  department: 'General Medicine' | 'Emergency & Trauma' | 'Cardiology' | 'Pulmonology' | 'Pediatrics' | 'Infectious Diseases';
+  roomBed: string; // e.g. Consultation Suite 3 / Bed B-12
+  attendingDoctor: string; // e.g. Dr. A. Sharma, MD
+  queueStatus: 'In Consultation' | 'Waiting in Triage' | 'Investigations Ordered' | 'Discharged';
+  waitTimeMinutes: number;
+}
+
+export interface PrescriptionItem {
+  id: string;
+  medicineName: string;
+  dosage: string;
+  route: 'Oral' | 'IV' | 'IM' | 'Inhalation' | 'Topical';
+  frequency: 'OD (Once Daily)' | 'BD (Twice Daily)' | 'TDS (Thrice Daily)' | 'QID (4 Times Daily)' | 'SOS (As Needed)';
+  timing: 'After Food (PC)' | 'Before Food (AC)' | 'At Bedtime (HS)' | 'With Food';
+  duration: string;
+  instructions: string;
+}
+
+export interface ICD10Code {
+  code: string;
+  description: string;
+  category: string;
+  confidence: number; // 0-100
+}
+
 export interface Patient {
   id: string;
   name: string;
@@ -18,6 +58,8 @@ export interface Patient {
   emergencyContact: string;
   consent: boolean;
   registeredAt: string;
+  vitals?: PatientVitals;
+  hospitalAssignment?: HospitalAssignment;
 }
 
 export interface ChatMessage {
@@ -62,16 +104,22 @@ export interface MedicalDocument {
   extractedDate: string;
   extractedDetails: string;
   verifiedByPractitioner: boolean;
+  labBiomarkers?: {
+    name: string;
+    value: string;
+    reference: string;
+    status: 'Normal' | 'High' | 'Low' | 'Critical';
+  }[];
 }
 
 export interface TimelineEvent {
   id: string;
   date: string;
-  type: 'visit' | 'symptom' | 'report' | 'medication' | 'summary';
+  type: 'visit' | 'symptom' | 'report' | 'medication' | 'summary' | 'vital';
   title: string;
   description: string;
   badge: string;
-  badgeColor: 'blue' | 'emerald' | 'amber' | 'purple' | 'red';
+  badgeColor: 'blue' | 'emerald' | 'amber' | 'purple' | 'red' | 'pink';
   details?: string[];
 }
 
@@ -108,6 +156,8 @@ export interface CaseSummary {
   practitionerNotes: string;
   practitionerSigned: boolean;
   signedBy?: string;
+  icdCodes?: ICD10Code[];
+  prescriptions?: PrescriptionItem[];
 }
 
 export interface DashboardStats {
@@ -115,4 +165,6 @@ export interface DashboardStats {
   todayCases: number;
   pendingReviews: number;
   completedCases: number;
+  criticalTriageAlerts: number;
+  bedOccupancyRate: number; // percentage
 }
